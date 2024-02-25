@@ -1,0 +1,15 @@
+SELECT c."firstName", o."inDelivery"
+FROM "Couriers" AS c
+JOIN "Orders" AS o ON c.id = o."courierId"
+WHERE o."inDelivery" = 'true';
+
+
+
+SELECT "inDelivery", cancelled, finished,
+CASE
+WHEN finished = 'true' THEN 2
+WHEN cancelled = 'true' THEN -1
+WHEN "inDelivery" = 'true' THEN 1
+ELSE 0
+END
+FROM "Orders";
