@@ -1,15 +1,17 @@
-SELECT c."firstName", o."inDelivery"
+SELECT c."firstName",
+COUNT(o."inDelivery") AS "status in delivery"
 FROM "Couriers" AS c
 JOIN "Orders" AS o ON c.id = o."courierId"
-WHERE o."inDelivery" = 'true';
+WHERE o."inDelivery" = 'true'
+GROUP BY c."firstName", o."inDelivery";
 
 
 
-SELECT "inDelivery", cancelled, finished,
+SELECT track,
 CASE
 WHEN finished = 'true' THEN 2
 WHEN cancelled = 'true' THEN -1
 WHEN "inDelivery" = 'true' THEN 1
 ELSE 0
-END
+END AS "order status"
 FROM "Orders";
